@@ -1,8 +1,8 @@
-name: Minecraft 24-7 Action
+name: Minecraft Simple Start
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */6 * * *' # Har 6 ghante mein auto-restart
+    - cron: '0 */6 * * *'
 
 jobs:
   run-mc:
@@ -19,38 +19,10 @@ jobs:
           java-version: '21'
           distribution: 'microsoft'
 
-      - name: Install Playit
-        run: |
-          curl -SsL https://playit-cloud.github.io/ppa/key.gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/playit.gpg
-          echo "deb [signed-by=/etc/apt/trusted.gpg.d/playit.gpg] https://playit-cloud.github.io/ppa/data ./ " | sudo tee /etc/apt/sources.list.d/playit-cloud.list
-          sudo apt update && sudo apt install playit -y
-
-      - name: Run Server & Auto-Save
-        env:
-          PLAYIT_SECRET: ${{ secrets.PLAYIT_SECRET }}
+      - name: Run Server
         run: |
           cd SERVER
-          
-          # 1. Config setup
-          echo "$PLAYIT_SECRET" > playit.toml
           echo "eula=true" > eula.txt
           
-          # 2. Auto-Save Loop (Background)
-          while true; do
-            sleep 1800
-            git config --global user.name "Dhyan-Bot"
-            git config --global user.email "bot@github.com"
-            git add .
-            git commit -m "Auto-save world: $(date)" || echo "No changes"
-            git push
-          done &
-
-          # 3. Start Playit Agent (Background)
-          # Note: 'playit' bina 'run' ke direct chalta hai ya 'playit start'
-          playit run --secret "$PLAYIT_SECRET" & 
-
-          # 4. Start Minecraft Server (Foreground)
-          # Isko last mein rakhenge taaki workflow chalta rahe
+          # Memory 12GB rakhte hain taaki crash na ho
           java -Xmx12G -Xms12G -jar server.jar nogui
-
-      
