@@ -29,14 +29,13 @@ jobs:
         env:
           PLAYIT_SECRET: ${{ secrets.PLAYIT_SECRET }}
         run: |
-          # 1. Folder ke andar jao (Apne folder ka sahi naam yahan check karo)
           cd SERVER
           
-          # 2. Config setup
+          # 1. Config setup
           echo "$PLAYIT_SECRET" > playit.toml
           echo "eula=true" > eula.txt
           
-          # 3. Background loop for Auto-Save to GitHub
+          # 2. Auto-Save Loop (Background)
           while true; do
             sleep 1800
             git config --global user.name "Dhyan-Bot"
@@ -46,5 +45,12 @@ jobs:
             git push
           done &
 
-          # 4. Start Server with 12GB RAM (16GB machine)
-          java -Xmx14G -Xms12G -jar server.jar nogui & playit run
+          # 3. Start Playit Agent (Background)
+          # Note: 'playit' bina 'run' ke direct chalta hai ya 'playit start'
+          playit run --secret "$PLAYIT_SECRET" & 
+
+          # 4. Start Minecraft Server (Foreground)
+          # Isko last mein rakhenge taaki workflow chalta rahe
+          java -Xmx12G -Xms12G -jar server.jar nogui
+
+      
