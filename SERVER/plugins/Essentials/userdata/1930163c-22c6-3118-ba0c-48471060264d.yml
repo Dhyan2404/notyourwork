@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 103.81.93.57
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1773121938463
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1773124349735
+  login: 1773121847451
+money: '0'
+last-account-name: SWEETY_JI
+lastlocation:
+  world: aca5d1de-4e85-47bf-9613-c10d6df1edf5
+  world-name: world
+  x: -600.7942858508123
+  y: 40.37910024086357
+  z: -1034.2814098309227
+  yaw: -107.99939727783203
+  pitch: 38.39998245239258
+logoutlocation:
+  world: aca5d1de-4e85-47bf-9613-c10d6df1edf5
+  world-name: world
+  x: 152.6720786088795
+  y: 71.0
+  z: -506.5743507085591
+  yaw: -114.608154296875
+  pitch: 27.750036239624023

@@ -1,0 +1,15 @@
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
+#                                                                               #
+#                      FasterHoppers | Main Configuration                       #
+#                               Version 4.0                                     #
+#                                                                               #
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
+
+# This message is shown when an administrator uses the /fh reload command.
+reload-message: "&a&lFasterHoppers &7» Configuration files have been reloaded."
+
+# Settings for the item filtering system.
+item-filtering:
+  # Set to true to allow players to shift-right-click TurboHoppers
+  # to open a GUI where they can filter items.
+  enabled: true

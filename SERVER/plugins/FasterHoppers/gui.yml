@@ -1,0 +1,42 @@
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
+#                                                                               #
+#                      FasterHoppers | GUI Configuration                        #
+#                               Version 4.0                                     #
+#                                                                               #
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
+
+main-menu:
+  title: "&c&lHopper Settings"
+  size: 27
+  filler-item: "LIGHT_GRAY_STAINED_GLASS_PANE"
+  items:
+    speed-editor:
+      material: "OAK_SIGN"
+      slot: 11
+      name: "&a&lChange Hopper Speeds"
+      lore:
+        - "&7Click to modify the speed"
+        - "&7of each hopper tier."
+    recipe-editor:
+      material: "CRAFTING_TABLE"
+      slot: 13
+      name: "&e&lEdit Recipes"
+      lore:
+        - "&7Click to visually change"
+        - "&7hopper crafting recipes."
+    toggle-recipes:
+      material: "REPEATER"
+      slot: 15
+      name: "&c&lToggle Recipes"
+      lore:
+        - "&7Click to enable or disable"
+        - "&7crafting for each hopper."
+
+sub-menu-titles:
+  toggle-menu: "&4&lToggle Hopper Recipes"
+  speed-menu: "&2&lEdit Hopper Speeds"
+  recipe-select-menu: "&6&lEdit Hopper Recipes"
+  recipe-editor-prefix: "&3Editing Recipe: "
+
+filter-menu-title: "&1&lHopper Filter"
+item-browse-title: "&1&lSelect Items"

@@ -1,0 +1,48 @@
+pages:
+  page1:
+    items:
+      '1':
+        material: END_CRYSTAL
+        buy: 2992.0
+        sell: 0.0
+      '2':
+        material: OBSIDIAN
+        buy: 500.0
+        sell: 1.0
+      '3':
+        material: TOTEM_OF_UNDYING
+        buy: 3200.0
+        sell: 0.0
+      '4':
+        material: ENDER_PEARL
+        buy: 32.0
+        sell: 0.0
+      '5':
+        material: WIND_CHARGE
+        buy: 20.0
+        sell: 1.0
+      '6':
+        material: RESPAWN_ANCHOR
+        buy: 2000.0
+        sell: 1.0
+      '7':
+        material: GLOWSTONE
+        buy: 200.0
+        sell: 1.0
+      '8':
+        material: NETHERITE_UPGRADE_SMITHING_TEMPLATE
+        buy: 200000.0
+        sell: 1.0
+      '9':
+        material: EXPERIENCE_BOTTLE
+        buy: 4000.0
+        sell: 200.0
+        stack-size: 64
+      '10':
+        material: BLAZE_ROD
+        buy: 100.0
+        sell: 10.0
+      '11':
+        material: FIREWORK_ROCKET
+        buy: 10.0
+        sell: 1.0

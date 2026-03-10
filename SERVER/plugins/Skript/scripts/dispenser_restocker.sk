@@ -1,0 +1,75 @@
+options:
+    # --- CONFIGURATION ---
+    RADIUS: 100
+    MAX_HEIGHT: 5
+    BONEMEAL_TYPE: bone meal
+    # The maximum amount to add to the dispenser (9 slots * 64 = 576)
+    MAX_FILL_AMOUNT: 576 
+    
+    # --- VARIABLES ---
+    # Global variable to store the total bonemeal "used" (spawned)
+    variable: {bonemeal.budget} = 0
+    variable: {dispensers.filled} = 0
+
+
+# --- COMMAND TRIGGER ---
+command /refilldispensers:
+    description: Fills all dispensers in the area above the player with MAX_FILL_AMOUNT of bonemeal.
+    permission: skript.refilldispensers
+    permission message: &cYou do not have permission to run this command.
+    trigger:
+        set {_start_time} to now
+        set {bonemeal.budget} to 0
+        set {dispensers.filled} to 0
+
+        # 1. Set the Scanning Boundaries (Crucial for lag prevention)
+        set {_loc1} to player's location
+        remove {@RADIUS} from x coord of {_loc1}
+        remove {@RADIUS} from z coord of {_loc1}
+        # Start checking 1 block ABOVE the player's current Y-level
+        add 1 to y coord of {_loc1} 
+
+        set {_loc2} to player's location
+        add {@RADIUS} to x coord of {_loc2}
+        add {@RADIUS} to z coord of {_loc2}
+        # End checking at player's Y-level + MAX_HEIGHT
+        add {@MAX_HEIGHT} to y coord of {_loc2}
+        
+        send "&7Starting **Creative Refill** scan in a &e{@RADIUS}&7 block radius..."
+        
+        # 2. Start the Block Loop
+        loop blocks within {_loc1} to {_loc2}:
+            set {_block} to loop-block
+            
+            # Check if it is a dispenser
+            if {_block} is dispenser:
+                set {_dispenser_inv} to inventory of {_block}
+                
+                # Store amount of bonemeal in dispenser before filling
+                set {_before_count} to amount of {@BONEMEAL_TYPE} in {_dispenser_inv}
+
+                # --- DIRECT ADDITION (No Player Inventory Check) ---
+                # Add the maximum possible amount (576) directly to the dispenser inventory.
+                # Skript automatically stops when the dispenser is full.
+                add {@MAX_FILL_AMOUNT} of {@BONEMEAL_TYPE} to {_dispenser_inv}
+
+                # Calculate how much was actually added
+                set {_after_count} to amount of {@BONEMEAL_TYPE} in {_dispenser_inv}
+                set {_amount_added} to {_after_count} - {_before_count}
+
+                # 3. Final Count and Message
+                if {_amount_added} > 0:
+                    add {_amount_added} to {bonemeal.budget}
+                    add 1 to {dispensers.filled}
+                    send "&aFilled dispenser at &e%location of {_block}%&a with %{_amount_added}% bonemeal." to player
+                    
+        # --- Final Output ---
+        set {_end_time} to now
+        set {_time_taken} to difference between {_start_time} and {_end_time}
+        
+        send " "
+        send "--- &6Refill Complete &r---"
+        send "&bTotal &e%{dispensers.filled}%&b dispenser(s) were filled in %{_time_taken}%."
+        send " "
+        send "### &eTotal Bonemeal Budget Used (Generated): **%{bonemeal.budget}%** ###"
+        send " "

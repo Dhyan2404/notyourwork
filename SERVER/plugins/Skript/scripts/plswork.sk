@@ -1,0 +1,93 @@
+options:
+    radius: 25
+    max-height: 4
+    bonemeal-item: bone meal
+    cost-per-bone-meal: 2
+    max-slots: 576
+    
+    # Visual Settings
+    animation-speed: 2 ticks
+    title-color: &6
+    subtitle-color: &e
+
+command /filldispenser:
+    permission: skript.refilldispensers
+    trigger:
+        set {_filled} to 0
+        set {_totalCost} to 0
+        set {_bonemealAdded} to 0
+        
+        # --- BALANCE CLEANER ---
+        set {_rawBal} to "%player's balance%"
+        replace all "$" and "," and " " in {_rawBal} with ""
+        set {_cleanBal} to {_rawBal} parsed as number
+        
+        if {_cleanBal} is not set:
+            send "&cError: Could not read your balance!"
+            stop
+
+        # --- Y-LEVEL LOGIC (Scan Above Feet Only) ---
+        set {_loc1} to player's location
+        subtract {@radius} from x-coordinate of {_loc1}
+        subtract {@radius} from z-coordinate of {_loc1}
+        # y-coordinate of {_loc1} remains at player's feet
+        
+        set {_loc2} to player's location
+        add {@radius} to x-coordinate of {_loc2}
+        add {@radius} to z-coordinate of {_loc2}
+        add {@max-height} to y-coordinate of {_loc2}
+
+        send title "{@title-color}Refill Started" with subtitle "{@subtitle-color}Scanning Above..." to player for 30 ticks
+        
+        loop blocks within {_loc1} and {_loc2}:
+            if loop-block is a dispenser:
+                set {_inv} to loop-block's inventory
+                set {_current} to amount of {@bonemeal-item} in {_inv}
+                set {_needed} to {@max-slots} - ({_current} ? 0)
+
+                if {_needed} > 0:
+                    set {_cost} to {_needed} * {@cost-per-bone-meal}
+                    
+                    if {_cleanBal} >= {_cost}:
+                        remove {_cost} from {_cleanBal}
+                        execute console command "eco take %player% %{_cost}%"
+                        
+                        add {_needed} of {@bonemeal-item} to {_inv}
+                        add {_cost} to {_totalCost}
+                        add {_needed} to {_bonemealAdded}
+                        add 1 to {_filled}
+                        
+                        # --- PER-DISPENSER EFFECTS ---
+                        set {_loc} to location of loop-block
+                        add 0.5 to y-coordinate of {_loc}
+                        set {_x} to x-coordinate of {_loc}
+                        set {_y} to y-coordinate of {_loc}
+                        set {_z} to z-coordinate of {_loc}
+                        
+                        # Particle effect (Console bypass for 1.21.4 stability)
+                        execute console command "execute at %player% run particle minecraft:happy_villager %{_x}% %{_y}% %{_z}% 0.3 0.3 0.3 0.1 8"
+                        play sound "entity.item.pickup" with volume 0.4 and pitch 1.4 at {_loc} to player
+                        
+                        # Action bar feedback is now the main indicator
+                        send action bar "&a✔ &f+%{_needed}% Bone Meal &8• &a-$%{_cost}%" to player
+                        
+                        wait {@animation-speed}
+                    else:
+                        send "&cStopping! Insufficient funds." to player
+                        stop loop
+                        
+        # --- FINAL SUMMARY ---
+        play sound "entity.player.levelup" with volume 1 and pitch 1 to player
+        
+        send " "
+        send "&8&l━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        send "     &6&lREFILL COMPLETE"
+        send "     &7Made by &fDhyan"
+        send "&8&l━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        send "&b  • &7Dispensers Filled: &f%{_filled}%"
+        send "&b  • &7Total Bone Meal: &f%{_bonemealAdded}%"
+        send "&b  • &7Total Cost: &c$%{_totalCost}%"
+        send "&8&l━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+        wait 20 ticks
+        send title "{@title-color}Done!" with subtitle "&7Area Refilled" to player for 40 ticks

@@ -1,0 +1,55 @@
+command /dfillequal:
+    trigger:
+
+        # FIND DOUBLE CHEST (Simplified Logic for maximum compatibility)
+        clear {_main}
+        loop blocks in radius 3 around player: # Radius set back to 3
+            # WARNING: This line will still give a warning, but it should load.
+            if loop-block is one of chest, trapped chest: 
+                set {_main} to loop-block # Set the variable to the first chest half found
+                stop loop
+
+        if {_main} is not set:
+            send "&cNo double chest found near you!"
+            stop
+
+        # Skript will correctly resolve 'inventory of {_main}' (one half) to the double chest's inventory (54 slots)
+        set {_mainInv} to inventory of {_main} 
+        
+        # At this point, if the chest is found, the rest of the script should work.
+        
+        # GET BONE MEAL TOTAL
+        set {_total} to amount of bone meal in {_mainInv}
+        if {_total} <= 0:
+            send "&cChest has no bone meal!"
+            stop
+
+        # FIND DISPENSERS
+        clear {_disp::*}
+        loop blocks in radius 50 around player:
+            if loop-block is dispenser: 
+                add loop-block to {_disp::*}
+
+        set {_count} to size of {_disp::*}
+        if {_count} <= 0:
+            send "&cNo dispensers found!"
+            stop
+
+        # CALCULATE SHARE
+        set {_share} to floor({_total} / {_count})
+        if {_share} <= 0:
+            send "&cNot enough bone meal to split equally!"
+            stop
+
+        # REMOVE bone meal manually
+        set {_remove} to {_share} * {_count}
+        loop {_remove} times:
+            remove 1 bone meal from {_mainInv}
+
+        # ADD TO EACH DISPENSER
+        loop {_disp::*}:
+            loop {_share} times:
+                add 1 bone meal to inventory of loop-value-1 
+
+        send "&aDistributed %{_share}% bone meal to %{_count}% dispensers!"
+

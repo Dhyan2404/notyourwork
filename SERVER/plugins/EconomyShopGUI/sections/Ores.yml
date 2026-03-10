@@ -1,0 +1,5 @@
+enable: true
+item:
+  material: NETHERITE_INGOT
+  displayname: '&1&lORES'
+slot: 30

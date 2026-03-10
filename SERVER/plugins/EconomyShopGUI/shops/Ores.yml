@@ -1,0 +1,31 @@
+pages:
+  page1:
+    items:
+      '1':
+        material: ANCIENT_DEBRIS
+        buy: 20000.0
+        sell: 10000.0
+      '2':
+        material: DIAMOND
+        buy: 999.0
+        sell: 499.0
+      '3':
+        material: EMERALD
+        buy: 1599.0
+        sell: 99.0
+      '4':
+        material: LAPIS_LAZULI
+        buy: 159.0
+        sell: 99.0
+      '5':
+        material: IRON_INGOT
+        buy: 200.0
+        sell: 10.0
+      '6':
+        material: GOLD_INGOT
+        buy: 3000.0
+        sell: 1.0
+      '7':
+        material: COAL
+        buy: 100.0
+        sell: 1.0

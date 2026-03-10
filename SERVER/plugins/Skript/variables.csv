@@ -1,0 +1,13 @@
+# === Skript's variable storage ===
+# Please do not modify this file manually!
+#
+# version: 2.12.2
+
+bm.autofill.enabled, boolean, 00
+bm.chest.name, string, 8010426F6E65204D65616C20537570706C79
+bm.radius, long, 000000000000000A
+bonemeal.cost, long, 0000000000000002
+currency.name, string, 80025253
+max.stack, long, 0000000000000040
+search.radius, long, 0000000000000064
+

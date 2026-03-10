@@ -1,0 +1,69 @@
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
+#                                                                               #
+#                      FasterHoppers | Custom Recipes                           #
+#                               Version 4.0                                     #
+#                                                                               #
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
+
+slowest:
+  speed: 4
+  crafting:
+    enabled: true
+    recipe:
+      - [ 'AIR',      'REDSTONE', 'AIR' ]
+      - [ 'REDSTONE', 'HOPPER',   'REDSTONE' ]
+      - [ 'AIR',      'REDSTONE', 'AIR' ]
+
+slower:
+  speed: 8
+  crafting:
+    enabled: true
+    recipe:
+      - [ 'IRON_NUGGET', 'REDSTONE', 'IRON_NUGGET' ]
+      - [ 'REDSTONE',    'slowest',  'REDSTONE' ]
+      - [ 'IRON_NUGGET', 'REDSTONE', 'IRON_NUGGET' ]
+
+slow:
+  speed: 12
+  crafting:
+    enabled: true
+    recipe:
+      - [ 'GOLD_NUGGET', 'REDSTONE', 'GOLD_NUGGET' ]
+      - [ 'REDSTONE',    'slower',   'REDSTONE' ]
+      - [ 'GOLD_NUGGET', 'REDSTONE', 'GOLD_NUGGET' ]
+
+fast:
+  speed: 16
+  crafting:
+    enabled: true
+    recipe:
+      - [ 'EMERALD',  'REDSTONE', 'EMERALD' ]
+      - [ 'REDSTONE', 'slow',     'REDSTONE' ]
+      - [ 'EMERALD',  'REDSTONE', 'EMERALD' ]
+
+faster:
+  speed: 20
+  crafting:
+    enabled: true
+    recipe:
+      - [ 'QUARTZ',   'REDSTONE', 'QUARTZ' ]
+      - [ 'REDSTONE', 'fast',     'REDSTONE' ]
+      - [ 'QUARTZ',   'REDSTONE', 'QUARTZ' ]
+
+fastest:
+  speed: 24
+  crafting:
+    enabled: true
+    recipe:
+      - [ 'AMETHYST_SHARD', 'REDSTONE', 'AMETHYST_SHARD' ]
+      - [ 'REDSTONE',       'faster',   'REDSTONE' ]
+      - [ 'AMETHYST_SHARD', 'REDSTONE', 'AMETHYST_SHARD' ]
+
+extreme:
+  speed: 64
+  crafting:
+    enabled: true
+    recipe:
+      - [ 'DIAMOND',  'REDSTONE', 'DIAMOND' ]
+      - [ 'REDSTONE', 'fastest',  'REDSTONE' ]
+      - [ 'DIAMOND',  'REDSTONE', 'DIAMOND' ]
