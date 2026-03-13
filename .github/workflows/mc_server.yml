@@ -25,4 +25,4 @@ jobs:
           echo "eula=true" > eula.txt
           
           # Memory 12GB rakhte hain taaki crash na ho
-          java -Xmx12G -Xms12G -jar server.jar nogui
+          java -Xmx16G -Xms16G -jar server.jar nogui
